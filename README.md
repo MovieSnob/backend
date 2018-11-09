@@ -1,10 +1,10 @@
-# I'm a be a Movie Snob
+# Imma Be a Movie Snob
 
 ![Psycho](https://immabe-movie-snob.herokuapp.com/psycho.jpeg)
 
 ## Backend
 
-I'm a be a Movie Snob is a tiny app to keep track of movies, watched with friends.
+Imma Be a Movie Snob is a tiny app to keep track of movies, watched with friends.
 
 ## API Docs
 
