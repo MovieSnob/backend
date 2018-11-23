@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="default.css">
+        <title>ImmabeMovieSnob</title>
+    </head>
+    <body>
+        <div class="add">
+            <div class="add__container">
+                <!-- <input type="text" class="add__title" placeholder="Add Title">
+                <input type="text" class="add__director" placeholder="Director">
+                <input type="number" class="add__year" placeholder="Year">
+                <button class="add__btn">Add Movie</button> -->
+
+                <form action="https://immabe-movie-snob.herokuapp.com/films" method="post">
+                    <input type="text" class="add__title" name="film[title]" placeholder="Add Title">
+                    <input type="text" class="add__director"  name="film[director]" placeholder="Director">
+                    <input type="number" class="add__year"  name="film[year]" placeholder="Year">
+                    <input type="submit"/>
+                </form>
+            </div>
+        </div>
+    <!-- <script src="script.js"></script> -->
+    </body>
+</html>
