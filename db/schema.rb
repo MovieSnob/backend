@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_233222) do
+ActiveRecord::Schema.define(version: 2019_07_20_132034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(version: 2019_07_18_233222) do
     t.string "director"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
+    t.string "poster"
+    t.integer "movie_db_id"
+    t.bigint "user_id"
+    t.index ["movie_db_id"], name: "index_films_on_movie_db_id"
+    t.index ["user_id"], name: "index_films_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "film_id"
+    t.date "date_watched"
+    t.date "date_reviewed"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["film_id"], name: "index_reviews_on_film_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +49,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_233222) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "films", "users"
+  add_foreign_key "reviews", "films"
+  add_foreign_key "reviews", "users"
 end
