@@ -5,4 +5,14 @@ class User < ApplicationRecord
 
   has_many :films
   has_many :reviews
+
+  default_scope { order(name: :asc) }
+
+  def appear
+    update(online: true)
+  end
+
+  def disappear
+    update(online: false)
+  end
 end

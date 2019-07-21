@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  def index
+    render json: User.all
+  end
+
   def me
-    render json: {
-      name: @current_user.name,
-      email: @current_user.email
-    }
+    render json: @current_user
   end
 end

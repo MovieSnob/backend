@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   post 'authenticate', to: 'authentication#authenticate'
   post 'register', to: 'authentication#register'
 
-  get 'users/me'
+  resources :users, only: %i[index] do
+    collection do
+      get 'me'
+    end
+  end
 
   resources :films, only: %i[create index] do
     collection do
