@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Film < ApplicationRecord
   enum state: %i[suggested watched reviewed]
 

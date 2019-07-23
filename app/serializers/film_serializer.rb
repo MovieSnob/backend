@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FilmSerializer < ActiveModel::Serializer
   attributes :id, :title, :year, :poster, :watched_on, :suggested_by
 
@@ -6,9 +8,11 @@ class FilmSerializer < ActiveModel::Serializer
   end
 
   def suggested_by
+    user = object.user
     {
-      id: object.user.id,
-      name: object.user.name
+      id: user.id,
+      name: user.name,
+      gender: user.gender
     }
   end
 end

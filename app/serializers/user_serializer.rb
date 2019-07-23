@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :watched_movies
+  attributes :id, :name, :email, :gender, :watched_movies
 
   def watched_movies
     object.reviews.where.not(date_watched: nil).pluck(:film_id)

@@ -1,3 +1,4 @@
-class ReviewsController < ApplicationController
+# frozen_string_literal: true
 
+class ReviewsController < ApplicationController
 end

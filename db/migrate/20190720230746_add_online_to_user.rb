@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddOnlineToUser < ActiveRecord::Migration[5.2]
   def change
     add_column :users, :online, :boolean, default: false
