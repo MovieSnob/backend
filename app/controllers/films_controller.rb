@@ -28,13 +28,32 @@ class FilmsController < ApplicationController
   end
 
   def score
+    film = Film.find(params[:id])
+
     review.update(date_reviewed: Date.today, score: params[:score])
+
+    ActionCable.server.broadcast(
+      'review',
+      type: 'scores',
+      scores: scores(film),
+      movie_id: film.id,
+      all_voted: false # TODO: if all users have voted
+    )
   end
 
   private
 
   def review
     Review.find_or_create_by(user: current_user, film_id: params[:id])
+  end
+
+  def scores(film)
+    film.reviews.map do |review|
+      {
+        user_id: review.user_id,
+        score: review.score
+      }
+    end
   end
 
   def film_params
