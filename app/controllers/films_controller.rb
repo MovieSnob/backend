@@ -20,18 +20,22 @@ class FilmsController < ApplicationController
   end
 
   def mark_watched
-    Review
-      .find_or_create_by(user: current_user, film_id: params[:id])
-      .update(date_watched: params[:date])
+    review.update(date_watched: params[:date])
   end
 
   def mark_unwatched
-    Review
-      .find_or_create_by(user: current_user, film_id: params[:id])
-      .update(date_watched: nil)
+    review.update(date_watched: nil)
+  end
+
+  def score
+    review.update(date_reviewed: Date.today, score: params[:score])
   end
 
   private
+
+  def review
+    Review.find_or_create_by(user: current_user, film_id: params[:id])
+  end
 
   def film_params
     params.require(:film).permit(

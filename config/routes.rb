@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     member do
       post 'watched', to: 'films#mark_watched'
       post 'unwatched', to: 'films#mark_unwatched'
+      patch 'score'
     end
   end
 end
