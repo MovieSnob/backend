@@ -36,6 +36,9 @@ workers ENV.fetch("WEB_CONCURRENCY") { 1 }
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
 
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
+
 stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
 
 # Set master PID and state locations
@@ -46,7 +49,6 @@ activate_control_app
 on_worker_boot do
   require 'active_record'
 
-  app_dir = File.expand_path('..', __dir__)
 
   begin
     ActiveRecord::Base.connection.disconnect!
