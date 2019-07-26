@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :api do
+  scope '/api' do
     mount ActionCable.server => '/cable'
 
     post 'authenticate', to: 'authentication#authenticate'
