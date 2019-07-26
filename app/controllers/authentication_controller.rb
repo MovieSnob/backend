@@ -7,7 +7,7 @@ class AuthenticationController < ApplicationController
     user = User.create(
       name: params[:name],
       email: params[:email],
-      password: params[:password]
+      password: params[:password],
       gender: params[:gender]
     )
 
