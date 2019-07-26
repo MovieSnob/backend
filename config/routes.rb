@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :films, only: %i[create index] do
+    resources :films, only: %i[create index destroy] do
       collection do
         get 'suggested'
       end

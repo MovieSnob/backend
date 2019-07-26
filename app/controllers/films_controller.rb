@@ -37,9 +37,15 @@ class FilmsController < ApplicationController
       'review',
       type: 'scores',
       scores: scores(film),
-      movie_id: film.id,
-      all_voted: false # TODO: if all users have voted
+      movie_id: film.id
     )
+  end
+
+  def destroy
+    film = Film.find(params[:id])
+
+    film.reviews.delete_all
+    film.delete
   end
 
   private

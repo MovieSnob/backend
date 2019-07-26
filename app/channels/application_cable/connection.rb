@@ -11,7 +11,7 @@ module ApplicationCable
     private
 
     def find_verified_user
-      user_id = JsonWebToken.decode(cookies['MovieSnob-Token']).fetch('user_id')
+      user_id = JsonWebToken.decode(cookies['MovieSnob-Token'])&.fetch('user_id')
 
       User.find_by(id: user_id) || reject_unauthorized_connection
     end
