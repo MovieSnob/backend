@@ -30,7 +30,8 @@ class FilmsController < ApplicationController
   def score
     film = Film.find(params[:id])
 
-    review.update(date_reviewed: Date.today, score: params[:score])
+    date_watched = review.date_watched || Date.today
+    review.update(date_watched: date_watched, date_reviewed: Date.today, score: params[:score])
 
     ActionCable.server.broadcast(
       'review',
