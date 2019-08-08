@@ -32,6 +32,7 @@ class FilmsController < ApplicationController
 
     date_watched = review.date_watched || Date.today
     review.update(date_watched: date_watched, date_reviewed: Date.today, score: params[:score])
+    film.reviewed! if film.reviewed_by_everyone?
 
     ActionCable.server.broadcast(
       'review',
