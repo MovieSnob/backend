@@ -15,6 +15,10 @@ class FilmsController < ApplicationController
     render json: Film.watched
   end
 
+  def reviewed
+    render json: Film.reviewed, each_serializer: ReviewedFilmSerializer
+  end
+
   def index
     render json: Film.all
   end

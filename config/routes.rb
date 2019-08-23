@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :films, only: %i[create index destroy] do
       collection do
         get 'suggested'
+        get 'reviewed'
       end
 
       member do
