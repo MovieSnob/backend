@@ -16,7 +16,7 @@ class FilmsController < ApplicationController
   end
 
   def reviewed
-    render json: Film.reviewed, each_serializer: ReviewedFilmSerializer
+    render json: Film.reviewed.order(created_at: :desc), each_serializer: ReviewedFilmSerializer
   end
 
   def index

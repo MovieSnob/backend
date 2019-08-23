@@ -4,7 +4,7 @@ class ReviewedFilmSerializer < ActiveModel::Serializer
   attributes :watched_on, :title, :year, :poster, :suggested_by, :scores, :avg
 
   def watched_on
-    scope.reviews&.find_by(film: object)&.date_watched
+    scope.reviews&.find_by(film: object)&.date_watched.to_time.to_i
   end
 
   def suggested_by
