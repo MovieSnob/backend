@@ -43,6 +43,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'dotenv-rails'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry-rails'
   gem 'rack-cors'

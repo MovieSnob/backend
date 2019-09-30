@@ -2,7 +2,7 @@
 
 class FilmsController < ApplicationController
   def create
-    Film.create(film_params.merge(user: @current_user))
+    FilmCreator.call(film_params.merge(user: @current_user))
 
     render json: Film.suggested
   end

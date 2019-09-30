@@ -28,3 +28,4 @@
 /public
 /shared/log/*
 /shared/pid/*
+.env

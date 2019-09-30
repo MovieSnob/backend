@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReviewedFilmSerializer < ActiveModel::Serializer
-  attributes :watched_on, :title, :year, :poster, :suggested_by, :scores, :avg
+  attributes :watched_on, :title, :year, :poster, :suggested_by, :scores, :avg, :director
 
   def watched_on
     object.created_at.to_time.to_i
