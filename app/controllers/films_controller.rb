@@ -24,18 +24,26 @@ class FilmsController < ApplicationController
   end
 
   def mark_watched
-    review.update(date_watched: params[:date])
+    Review
+      .find_or_create_by(user_id: params[:user_id], film_id: params[:id])
+      .update(date_watched: params[:date])
   end
 
   def mark_unwatched
-    review.update(date_watched: nil)
+    Review
+      .find_or_create_by(user_id: params[:user_id], film_id: params[:id])
+      .update(date_watched: nil)
   end
 
   def score
     film = Film.find(params[:id])
 
     date_watched = review.date_watched || Date.today
-    review.update(date_watched: date_watched, date_reviewed: Date.today, score: params[:score])
+    Review
+      .find_or_create_by(user: current_user, film_id: params[:id])
+      .update(
+        date_watched: date_watched, date_reviewed: Date.today, score: params[:score]
+      )
     film.reviewed! if film.reviewed_by_everyone?
 
     ActionCable.server.broadcast(
@@ -54,10 +62,6 @@ class FilmsController < ApplicationController
   end
 
   private
-
-  def review
-    Review.find_or_create_by(user: current_user, film_id: params[:id])
-  end
 
   def scores(film)
     film.reviews.map do |review|
