@@ -1,4 +1,5 @@
 require 'json'
+require 'net/http'
 
 class FilmCreator
   def self.call(params)
