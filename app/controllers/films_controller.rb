@@ -38,6 +38,7 @@ class FilmsController < ApplicationController
   def score
     film = Film.find(params[:id])
 
+    review = Review.find_or_create_by(user: current_user, film_id: params[:id])
     date_watched = review.date_watched || Date.today
     Review
       .find_or_create_by(user: current_user, film_id: params[:id])
