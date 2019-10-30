@@ -40,11 +40,13 @@ class FilmsController < ApplicationController
 
     review = Review.find_or_create_by(user: current_user, film_id: params[:id])
     date_watched = review.date_watched || Date.today
-    Review
-      .find_or_create_by(user: current_user, film_id: params[:id])
-      .update(
-        date_watched: date_watched, date_reviewed: Date.today, score: params[:score]
-      )
+
+    review.update(
+      date_watched: date_watched,
+      date_reviewed: Date.today,
+      score: params[:score]
+    )
+
     film.reviewed! if film.reviewed_by_everyone?
 
     ActionCable.server.broadcast(
@@ -75,7 +77,7 @@ class FilmsController < ApplicationController
 
   def film_params
     params.require(:film).permit(
-      :title, :year, :poster, :movie_db_id
+      :title, :year, :poster, :movie_db_id, :runtime
     )
   end
 end

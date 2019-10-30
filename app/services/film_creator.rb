@@ -5,9 +5,12 @@ class FilmCreator
   def self.call(params)
     current_film = film_data(params[:movie_db_id])
     directors = get_directors(current_film)
-    imdb_id = current_film['imdb_id']
 
-    Film.create(params.merge(director: directors, imdb_id: imdb_id))
+    Film.create(params.merge(
+                  director: directors,
+                  imdb_id: current_film['imdb_id'],
+                  runtime: current_film['runtime']
+                ))
   end
 
   def self.get_directors(film_data)

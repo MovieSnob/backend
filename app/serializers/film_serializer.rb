@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FilmSerializer < ActiveModel::Serializer
-  attributes :id, :title, :year, :poster, :watched_on, :suggested_by, :score, :scores, :director, :imdb_id
+  attributes :id, :title, :year, :poster, :watched_on, :suggested_by, :score, :scores, :director, :imdb_id, :runtime
 
   def watched_on
     scope.reviews&.find_by(film: object)&.date_watched
