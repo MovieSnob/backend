@@ -24,12 +24,22 @@ class FilmsController < ApplicationController
   end
 
   def mark_watched
+    user = User.find(params[:user_id])
+    film = Film.find(params[:id])
+
+    TelegramNotifier.call("#{user.name} #{user.gender == 0 ? 'посмотрел' : 'посмотрела'} фильм «#{film.title}»")
+
     Review
       .find_or_create_by(user_id: params[:user_id], film_id: params[:id])
       .update(date_watched: params[:date])
   end
 
   def mark_unwatched
+    user = User.find(params[:user_id])
+    film = Film.find(params[:id])
+
+    TelegramNotifier.call("#{user.name} #{user.gender == 0 ? 'отметил' : 'отметила'} фильм «#{film.title}» непросмотренным")
+
     Review
       .find_or_create_by(user_id: params[:user_id], film_id: params[:id])
       .update(date_watched: nil)
