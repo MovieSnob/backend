@@ -25,5 +25,7 @@ Rails.application.routes.draw do
         patch 'score'
       end
     end
+
+    resources :stats, only: %(index)
   end
 end
