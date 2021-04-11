@@ -3,6 +3,9 @@
 class FilmsController < ApplicationController
   def create
     FilmCreator.call(film_params.merge(user: @current_user))
+    TelegramNotifier.call(
+      "#{@current_user.name} #{@current_user.gender == 0 ? 'предложил' : 'предложила'} посмотреть фильм «#{film_params[:title]}»"
+    )
 
     render json: Film.suggested
   end
