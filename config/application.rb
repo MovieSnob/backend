@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 module Backend
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -35,5 +35,11 @@ module Backend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.hosts = ["localhost:3000", "localhost:3001", "moviesnob.ru"]
+    config.active_record.legacy_connection_handling = false
+
+    ActiveModel::Serializer.setup do |config|
+      config.key_format = :lower_camel
+    end
   end
 end

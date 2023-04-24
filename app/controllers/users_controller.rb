@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   end
 
   def me
-    render json: @current_user
+    render json: {
+      me: UserSerializer.new(@current_user),
+      users: ActiveModel::ArraySerializer.new(User.all, each_serializer: UserSerializer)
+    }
   end
 end
