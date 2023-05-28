@@ -55,7 +55,7 @@ class FilmsController < ApplicationController
     date_watched = review.date_watched || Date.today
 
     review.update(
-      date_watched: date_watched,
+      date_watched:,
       date_reviewed: Date.today,
       score: params[:score]
     )
@@ -64,9 +64,11 @@ class FilmsController < ApplicationController
 
     ActionCable.server.broadcast(
       'review',
-      type: 'scores',
-      scores: scores(film),
-      movie_id: film.id
+      {
+        type: 'scores',
+        scores: scores(film),
+        movie_id: film.id
+      }
     )
   end
 
